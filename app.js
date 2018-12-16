@@ -14,12 +14,17 @@ const app = express();
 
 // you can also do this:
 
-app.use((req, res, next) => {
-  console.log("1st go round");
-  next(); // allows the request to continue to the next middleware in line
+app.use('/', (req, res, next) => {
+  console.log("this always runs")
+  next();
 })
 
-app.use((req, res, next) => {
+app.use('/add-product', (req, res, next) => {
+  console.log("2nd go round")
+  res.send('<h1>Express Add product page</h1>')
+})
+
+app.use('/', (req, res, next) => {
   console.log("2nd go round")
   res.send('<h1>Hello from express</h1>')
 })
