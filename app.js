@@ -1,5 +1,9 @@
-const http = require('http');
-const routes = require('./routes');
+// const http = require('http');
+const express = require('express');
+const app = express();
+
+
+// const routes = require('./routes');
 
 
 // function rqListener(req, res) {
@@ -10,9 +14,19 @@ const routes = require('./routes');
 
 // you can also do this:
 
-console.log(routes.someText)
+app.use((req, res, next) => {
+  console.log("1st go round");
+  next(); // allows the request to continue to the next middleware in line
+})
 
-const server = http.createServer(routes.handler);
+app.use((req, res, next) => {
+  console.log("2nd go round")
+  res.send('<h1>Hello from express</h1>')
+})
 
-server.listen(3000);
+// const server = http.createServer(app);
+
+// server.listen(3000);
+
+app.listen(3000)
 
